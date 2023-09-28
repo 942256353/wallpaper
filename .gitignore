@@ -1,0 +1,8 @@
+node_modules
+dist
+out
+*.log*
+/nest/wallpaper/*
+
+wallpaper/*
+!wallpaper/.gitkeep
