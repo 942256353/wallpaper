@@ -2,7 +2,7 @@ import axios from 'axios';
 import { ElLoading,ElMessage } from 'element-plus';
 
 const http = axios.create({
-    baseURL: import.meta.env.DEV?'http://43.138.152.177:3001':'http://43.138.152.177:3001',
+    baseURL: import.meta.env.DEV?'http://localhost:3001':'http://43.138.152.177:3001',
     timeout: 10000,
     
 });
@@ -10,7 +10,7 @@ const http = axios.create({
 http.interceptors.request.use(
     config => {
         // 请求拦截器
-        ElLoading.service({fullscreen: true, text: 'Loading...'})
+        ElLoading.service({background: 'rgba(255,255,255,.2)', text: 'Loading...'})
         return config;
     },
     error => {
