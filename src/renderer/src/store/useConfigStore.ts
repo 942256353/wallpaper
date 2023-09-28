@@ -3,7 +3,8 @@ import { ref } from "vue";
 
 export const useConfigStore = defineStore('config',()=>{
     const config = ref({
-        url:''
+        url:'',
+        saveDirectory:'',
     })
     return {
         config

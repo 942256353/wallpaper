@@ -4,9 +4,11 @@ import Navbar from './components/Navbar.vue'
 
 <template>
   <Suspense>
-    <main>
+    <main class="flex flex-col h-screen">
       <Navbar />
-      <RouterView />
+      <RouterView #default="{Component}">
+        <component :is="Component" class="flex-1"/>
+      </RouterView>
     </main>
   </Suspense>
 </template>
@@ -14,4 +16,4 @@ import Navbar from './components/Navbar.vue'
 <style lang="less">
 // @import './assets/css/styles.less';
 </style>
-众乐乐
+

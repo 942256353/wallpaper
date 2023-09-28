@@ -4,8 +4,8 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  app.useStaticAssets('wallpaper',{prefix:'/wallpaper'})
+  // app.useStaticAssets('wallpaper',{prefix:'/wallpaper'})
   app.enableCors()
-  await app.listen(3000);
+  await app.listen(3001);
 }
 bootstrap();

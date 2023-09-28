@@ -14,7 +14,7 @@ export class AppController {
   async getHello() {
     const files = await readdir(resolve(__dirname, '..', 'wallpaper'));
     return (
-      'http://localhost:3000/wallpaper/' + files[_.random(files.length - 1)]
+      'http://localhost:3001/wallpaper/' + files[_.random(files.length - 1)]
     );
     //返回 buffer
     //   const file = await readFile(

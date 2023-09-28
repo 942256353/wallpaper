@@ -1,8 +1,9 @@
-import { app, shell, BrowserWindow } from 'electron'
+import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import './ipcMain'
+import {createTray} from './tray'
 
 function createWindow(): void {
   // Create the browser window.
@@ -11,9 +12,8 @@ function createWindow(): void {
     height: 370,
     alwaysOnTop: true,
     resizable:false,
-    x:2000,
-    y:100,
     show: false,
+    skipTaskbar:true,//window隐藏任务栏托盘
     autoHideMenuBar: true,
     frame:false,
     ...(process.platform === 'linux' ? { icon } : {}),
@@ -45,6 +45,10 @@ function createWindow(): void {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  //托盘图标
+  createTray(createWindow)
+  //隐藏苹果dock图标
+  if(process.platform === 'darwin') app.dock.hide()
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
 
@@ -61,6 +65,10 @@ app.whenReady().then(() => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  })
+
+  ipcMain.on('quit', () => {
+    app.quit()
   })
 })
 

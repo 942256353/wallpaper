@@ -4,7 +4,7 @@ import { ElLoading } from 'element-plus'
 import http from '@renderer/plugins/axios'
 import { useConfigStore } from '@renderer/store/useConfigStore'
 import useWallpaper from '@renderer/composables/useWallpaper'
-const {setWallpaper} = useWallpaper()
+const {setWallpaper,downloadImage} = useWallpaper()
 const { config } = useConfigStore()
 const img = ref<HTMLImageElement>()
 const load = async () => {
@@ -31,13 +31,13 @@ onMounted(() => {
       @click="load"
     />
     <div
-      class="bg-gray-200 text-center py-3 m-3 rounded-lg hover:bg-gray-300 duration-300 cursor-pointer opacity-80 shadow-sm nodrag" @click="setWallpaper"
+      class="bg-white text-center py-3 m-3 rounded-lg duration-300 cursor-pointer opacity-80 hover:shadow-sm hover:bg-gray-300 nodrag" @click="setWallpaper"
     >
       设为壁纸
     </div>
     <div class="mx-3 text-xs text-gray-700 flex justify-between items-center">
       <div>独乐乐不如众乐乐</div>
-      <div class="hover:font-bold cursor-pointer text-sm nodrag cursor-pointer">下载壁纸</div>
+      <div class="hover:font-bold cursor-pointer text-sm nodrag" @click="downloadImage">下载壁纸</div>
     </div>
   </div>
 </template>

@@ -1,5 +1,6 @@
-appId: com.electron.app
-productName: electron-app
+appId: com.xiaoxie.app
+productName: 小谢桌面壁纸
+copyright: Copyright © 2023 小谢
 directories:
   buildResources: build
 files:
@@ -12,7 +13,7 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: electron-app
+  executableName: 小谢桌面壁纸
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}

@@ -5,7 +5,7 @@ import Setting from '@renderer/views/setting.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/:any(.*)*',
     name: 'home',
     component: Home
   },

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { ElLoading,ElMessage } from 'element-plus';
 
 const http = axios.create({
-    baseURL: import.meta.env.DEV?'http://localhost:3000':'http://localhost:3000',
+    baseURL: import.meta.env.DEV?'http://localhost:3001':'http://43.138.152.177:3001',
     timeout: 10000,
     
 });
