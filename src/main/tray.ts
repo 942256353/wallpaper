@@ -1,6 +1,6 @@
 import { BrowserWindow, Menu, Tray, dialog } from 'electron'
 import path from 'path'
-const createTray = (createWindow:()=>void) => {
+const createTray = (createWindow:()=>void,mainWindow:BrowserWindow) => {
   const tray = new Tray(
     path.resolve(
       __dirname,
@@ -9,6 +9,20 @@ const createTray = (createWindow:()=>void) => {
         : '../../resources/windowTray.png' //可以使用彩色图片，图标的最大大小为 256x256 像素，设置为32x32像素即可
     )
   )
+  tray.on('click', (_e) => {
+    if (mainWindow) {
+      if (mainWindow.isVisible()) {
+        // 如果窗口是显示的，则隐藏窗口
+        mainWindow.hide()
+      } else {
+        // 如果窗口是隐藏的，则显示窗口
+        mainWindow.show()
+      }
+    } else {
+      // 如果窗口不存在，则创建窗口并显示
+      createWindow()
+    }
+  })
   const contextMenu = Menu.buildFromTemplate([
     {
       label:'设置壁纸',

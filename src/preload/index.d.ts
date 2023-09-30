@@ -9,6 +9,7 @@ declare global {
       setImageSaveDir: () => Promise<string>
       checkImageSaveDir:(path:string)=>Promise<boolean>
       quit: () => void
+      hide: () => void
     }
   }
 }

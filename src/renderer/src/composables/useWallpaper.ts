@@ -21,9 +21,13 @@ export default () => {
         const path = await window.api.setImageSaveDir()
         if (path) config.saveDirectory = path
     }
-
+    //窗口关闭
     const quit = () => {
         window.api.quit()
     }
-    return { setWallpaper, downloadImage, setImageSaveDir,quit }
+    //窗口最小化
+    const hide = () => {
+        window.api.hide()
+    }
+    return { setWallpaper, downloadImage, setImageSaveDir,quit,hide }
 }

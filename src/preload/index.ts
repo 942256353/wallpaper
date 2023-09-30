@@ -17,6 +17,9 @@ const api = {
   },
   quit: () => {
     ipcRenderer.send('quit')
+  },
+  hide: () => {
+    ipcRenderer.send('hide')
   }
 }
 
