@@ -43,14 +43,13 @@ function createWindow(): void {
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
+  createTray(createWindow,mainWindow)
 }
-
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   //托盘图标
-  createTray(createWindow,mainWindow)
   //隐藏苹果dock图标
   if(process.platform === 'darwin') app.dock.hide()
   // Set app user model id for windows

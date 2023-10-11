@@ -21,9 +21,11 @@ export class AppService {
       const res_1 = await fecth(imgUrl_2(id)).then(r => r.json()) 
       const start = _.random(res_1.total)==0?1:_.random(res_1.total)
       const data = await fecth(imgUrl_2(id,start)).then(r => r.json())
+      console.log('远程', data.data[0].url)
       return data.data[0].url
     } catch (error) {
       const files = await readdir(resolve(__dirname, '..', 'wallpaper'));
+      console.log('本地')
       return (
         'http://43.138.152.177:3001/wallpaper/' + files[_.random(files.length - 1)]
       );
