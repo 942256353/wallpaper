@@ -31,7 +31,7 @@ const del = (v:Tag, i:number) => {
 }
 </script>
 <template>
-  <main class="nodrag bg-[##a4b0be] p-2 font-bold">
+  <main class="nodrag bg-[##a4b0be] p-2 font-bold" v-if="config">
     <!-- 推荐标签-->
     <section class="tag-heading tag-height">
       <div class="tag-title">推荐标签({{ config.myTag.length }}/21)</div>

@@ -11,8 +11,8 @@ export type Tag = {
 export type Config = {
     url:string,
     saveDirectory:string,
-    tagData:Tag[]|[],
-    myTag:Tag[]|[]
+    tagData:Tag[],
+    myTag:Tag[], // 确保 myTag 是一个 Tag 数组
 }
 
 export const useConfigStore = defineStore('config',()=>{
