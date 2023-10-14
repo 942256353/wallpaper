@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import {Pic,SettingOne,CloseOne,Minus} from '@icon-park/vue-next'
+import {Pic,SettingOne,CloseOne,Minus,Like} from '@icon-park/vue-next'
 import useWallpaper from '@renderer/composables/useWallpaper'
 const {quit,hide} = useWallpaper()
 </script>
@@ -9,6 +9,7 @@ const {quit,hide} = useWallpaper()
         <section class="flex justify-center items-center gap-2">
             <Pic class="nodrag cursor-pointer text-gray-500" :class="{iconColor:$route.name==='home'}" theme="outline" size="20" @click="$router.push({name:'home'})"/>
             <SettingOne class="nodrag cursor-pointer text-gray-500" :class="{iconColor:$route.name==='setting'}" theme="outline" size="20" @click="$router.push({name:'setting'})"/>
+            <Like class="nodrag cursor-pointer text-gray-500" :class="{iconColorLike:$route.name==='favor'}" theme="filled" size="20" @click="$router.push({name:'favor'})"/>
             <Minus class="nodrag cursor-pointer text-gray-500 hover:text-black" theme="outline" @click="hide" size="20"/>
             <CloseOne  class="nodrag cursor-pointer text-gray-500 hover:text-red-600" theme="outline" size="20" @click="quit"/>
         </section>
@@ -18,5 +19,8 @@ const {quit,hide} = useWallpaper()
 <style lang='scss' scoped>
 .iconColor{
    color: #e67e22 !important;
+}
+.iconColorLike{
+    color: #f78fb3;
 }
 </style>

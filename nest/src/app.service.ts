@@ -9,14 +9,19 @@ import fecth from 'node-fetch';
 
 const imgUrl_1 = 'http://cdn.apc.360.cn/index.php?c=WallPaper&a=getAllCategoriesV2&from=360chrome';
 const imgUrl_2 = (id, start = 1) => (`http://wallpaper.apc.360.cn/index.php?c=WallPaper&a=getAppsByCategory&cid=${id}&start=${start}&count=1&from=360chrome`)
-
+let tags = []
+let resId = [];
 
 @Injectable()
 export class AppService {
-  async getImage() {
+  async getImage(tags:string) {
    try {
       const res = await fecth(imgUrl_1).then(r => r.json())
-      const resId = res.data.map(v => v.id)
+      if (tags) {
+        resId = tags.split(',')
+      }else{
+        resId = res.data.map(v => v.id)
+      }
       const id = resId[_.random(resId.length - 1)]
       const res_1 = await fecth(imgUrl_2(id)).then(r => r.json()) 
       const start = _.random(res_1.total)==0?1:_.random(res_1.total)
@@ -42,5 +47,17 @@ export class AppService {
     //     resolve(res.send(file))
     //   },2000)
     //  })
+  }
+
+  async getTag(){
+    try {
+      const res = await fecth(imgUrl_1).then(r => r.json())
+      tags = res.data.map(tag=>{
+        return {id:tag.id,name:tag.name}
+      })
+      return tags
+    } catch (error) {
+      return error
+    }
   }
 }

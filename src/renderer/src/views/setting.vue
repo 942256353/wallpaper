@@ -13,9 +13,9 @@ const {setImageSaveDir} = useWallpaper()
         <el-button type="primary" size="default" @click="setImageSaveDir">选择图片保存目录</el-button>
       </div>
     </section>
-    <div class="text-xs opacity-30 font-bold font-light flex flex-col items-center mt-5">
-        <span class=" text-orange-100">小谢作品</span>
-        <div>众乐乐不如独乐乐</div>
+    <div class="text-xs opacity-80 font-bold font-light flex flex-col items-center mt-5">
+        <span class="opacity-90 text-yellow-400">@小谢作品</span>
+        <div class="">众乐乐不如独乐乐</div>
     </div>
   </main>
 </template>
