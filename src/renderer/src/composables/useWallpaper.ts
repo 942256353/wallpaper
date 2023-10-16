@@ -2,8 +2,12 @@ import { useConfigStore } from "@renderer/store/useConfigStore"
 import { ElMessage } from "element-plus"
 import router from "@renderer/router"
 
+
 export default () => {
     const { config } = useConfigStore()
+    if(!config.isFirst){
+        window.api.appClose(()=>config.isFirst=true)
+    }
     const setWallpaper = async () => {
         const state = await window.api.checkImageSaveDir(config.saveDirectory)
         if (!state) {
@@ -29,5 +33,5 @@ export default () => {
     const hide = () => {
         window.api.hide()
     }
-    return { setWallpaper, downloadImage, setImageSaveDir,quit,hide }
+    return { setWallpaper, downloadImage, setImageSaveDir, quit, hide }
 }

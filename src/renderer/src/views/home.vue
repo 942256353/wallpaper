@@ -15,8 +15,16 @@ const load = async () => {
   img.value!.src = res.data
 }
 let debouceLoad;
+const start = async () => {
+  const res = await http.get(`/start`)
+  config.url = res.data
+  config.isFirst = false
+  img.value!.src = res.data
+}
 onMounted(() => {
-  if (!config.url) load()
+  if(config.isFirst){
+    start()
+  }
   debouceLoad = _.debounce(load, 500)
 })
 </script>

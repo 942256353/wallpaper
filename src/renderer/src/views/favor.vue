@@ -1,5 +1,5 @@
 <script lang='ts' setup>
-import { useConfigStore,Tag } from '@renderer/store/useConfigStore'
+import { useConfigStore, Tag } from '@renderer/store/useConfigStore'
 import http from '@renderer/plugins/axios'
 const { config } = useConfigStore()
 const getTags = async () => {
@@ -15,13 +15,13 @@ const getTags = async () => {
   }
 }
 getTags()
-const addTag = (v:Tag) => {
+const addTag = (v: Tag) => {
   v.flag = true
-  config.myTag.push(v)
-  //去重
-  config.myTag = [...new Set(config.myTag)]
+  if (!config.myTag.some((item) => item.id == v.id)) {
+    config.myTag.push(v)
+  }
 }
-const del = (v:Tag, i:number) => {
+const del = (v: Tag, i: number) => {
   config.myTag.splice(i, 1)
   config.tagData.forEach((item) => {
     if (item.id == v.id) {
@@ -29,12 +29,34 @@ const del = (v:Tag, i:number) => {
     }
   })
 }
+const clearMyTg = () => {
+  if (config.myTag.length == 0) return
+  config.myTag.forEach((v) => {
+    config.tagData.forEach((item) => {
+      if (item.id == v.id) {
+        item.flag = false
+      }
+    })
+  })
+  config.myTag = []
+}
 </script>
 <template>
   <main class="nodrag bg-[##a4b0be] p-2 font-bold" v-if="config">
     <!-- 推荐标签-->
     <section class="tag-heading tag-height">
-      <div class="tag-title">推荐标签({{ config.myTag.length }}/21)</div>
+      <div class="tag-title flex justify-between">
+        <div>推荐标签({{ config.myTag.length }}/21)</div>
+        <el-tag
+          type="danger"
+          size="small"
+          effect="plain"
+          :class="{ selectTag: config.myTag.length == 0 }"
+          @click="clearMyTg"
+          class="mr-2 hover:bg-[#ff7979] hover:text-white cursor-pointer"
+          >随机<span v-if="config.myTag.length == 0">✔</span></el-tag
+        >
+      </div>
       <div class="tag-body">
         <ul class="cloud">
           <li
@@ -68,8 +90,11 @@ const del = (v:Tag, i:number) => {
 ul li {
   list-style: none;
 }
-.tag-title{
-    @apply text-xs opacity-70;    
+.tag-title {
+  @apply text-xs opacity-70;
+}
+.selectTag {
+  @apply bg-[#eb4d4b] text-white hover:bg-[#ff7979];
 }
 /* body {
   font-size: 14px;

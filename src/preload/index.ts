@@ -20,8 +20,12 @@ const api = {
   },
   hide: () => {
     ipcRenderer.send('hide')
+  },
+  appClose:(callback)=>{
+    ipcRenderer.on('appClose', () =>callback())
   }
 }
+
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise

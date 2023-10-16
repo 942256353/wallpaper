@@ -8,7 +8,7 @@ const http = axios.create({
 });
 
 let ElLoadingService:LoadingInstance;
-const closeLoadingDelayTime:number = 500;
+const closeLoadingDelayTime:number = 1000;
 
 const closeLoading = () => {
     setTimeout(()=>ElLoadingService.close(),closeLoadingDelayTime)

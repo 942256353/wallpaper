@@ -14,4 +14,8 @@ export class AppController {
   async getTag() {
     return this.appService.getTag();
   }
+  @Get('start')
+  async getStart() {
+    return this.appService.getStart();
+  }
 }

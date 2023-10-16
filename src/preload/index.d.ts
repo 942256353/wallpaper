@@ -10,6 +10,7 @@ declare global {
       checkImageSaveDir:(path:string)=>Promise<boolean>
       quit: () => void
       hide: () => void
+      appClose:(fn:Function)=>void
     }
   }
 }

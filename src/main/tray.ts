@@ -55,7 +55,10 @@ const createTray = (createWindow:()=>void,mainWindow:BrowserWindow) => {
     },
     {
         label: '退出',
-        role:'quit'
+        role:'quit',
+        click:()=>{
+          mainWindow.webContents.postMessage('appClose','app关闭')
+        }
     }
 ])
   tray.setToolTip('小谢桌面壁纸')

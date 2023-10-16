@@ -1,19 +1,27 @@
-import { IpcMainEvent, IpcMainInvokeEvent, ipcMain } from 'electron'
+import { IpcMainEvent, IpcMainInvokeEvent, dialog, ipcMain } from 'electron'
 import fs from 'fs'
 import { resolve } from 'node:path'
 import wallpaper from 'wallpaper'
 import { downloadFile } from './utils'
 
+let urlCurrent = ''
+
 //1.图片下载 2.设置电脑壁纸
 ipcMain.on('setWallpaper', async (_event: IpcMainEvent, url: string, path: string) => {
   try {
-    const localPath = resolve(path, url.split('/').pop()!)
+    if(url.includes('=')){
+      urlCurrent = url.split('=')[1]
+    }else{
+      console.log(222)
+      urlCurrent = url.split('/').pop()!
+    }
+    const localPath = resolve(path,urlCurrent)
     //图片下载
     const file = await downloadFile(url, localPath)
     //设置电脑壁纸
     wallpaper.set(file, { screen: 'all', scale: 'auto' })
-  } catch (error) {
-    // dialog.showErrorBox('发生错误', '图片下载失败,请在设置中心重新定义目录')
+  } catch (error: any) {
+    dialog.showErrorBox('发生错误', error.message)
   }
 })
 

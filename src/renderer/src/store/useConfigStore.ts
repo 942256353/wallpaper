@@ -10,6 +10,7 @@ export type Tag = {
 
 export type Config = {
     url:string,
+    isFirst:boolean,
     saveDirectory:string,
     tagData:Tag[],
     myTag:Tag[], // 确保 myTag 是一个 Tag 数组
@@ -18,6 +19,7 @@ export type Config = {
 export const useConfigStore = defineStore('config',()=>{
     const config = ref<Config>({
         url:'',
+        isFirst:true,
         saveDirectory:'',
         tagData:[],
         myTag:[]

@@ -1,4 +1,4 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, MessageChannelMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
@@ -27,9 +27,6 @@ function createWindow(): void {
   if(is.dev) {mainWindow.webContents.openDevTools()}
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
-  })
-  ipcMain.on('quit', () => {
-    mainWindow.hide()
   })
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
@@ -73,6 +70,7 @@ app.whenReady().then(() => {
     mainWindow.hide()
   })
   ipcMain.on('quit', () => {
+    mainWindow.webContents.postMessage('appClose','app关闭')
     app.quit()
   })
 })
@@ -83,6 +81,7 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
+    mainWindow.webContents.postMessage('appClose','app关闭')
   }
 })
 
