@@ -5,16 +5,10 @@ import wallpaper from 'wallpaper'
 import { downloadFile } from './utils'
 
 let urlCurrent = ''
-
 //1.图片下载 2.设置电脑壁纸
 ipcMain.on('setWallpaper', async (_event: IpcMainEvent, url: string, path: string) => {
   try {
-    if(url.includes('=')){
-      urlCurrent = url.split('=')[1]
-    }else{
-      console.log(222)
-      urlCurrent = url.split('/').pop()!
-    }
+    urlCurrent ='xiaoxie_wallpaper_'+Date.now()+url.substring(url.lastIndexOf('.'));
     const localPath = resolve(path,urlCurrent)
     //图片下载
     const file = await downloadFile(url, localPath)

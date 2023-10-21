@@ -4,6 +4,7 @@ import http from '@renderer/plugins/axios'
 import { useConfigStore } from '@renderer/store/useConfigStore'
 import useWallpaper from '@renderer/composables/useWallpaper'
 import _ from 'lodash'
+import {WritingFluently} from '@icon-park/vue-next'
 
 const {setWallpaper,downloadImage} = useWallpaper()
 const { config } = useConfigStore()
@@ -44,10 +45,27 @@ onMounted(() => {
       设为壁纸
     </div>
     <div class="mx-3 text-xs text-gray-700 flex justify-between items-center">
-      <div>独乐乐不如众乐乐</div>
+      <div v-if="config.signature" class="flex items-center gap-1">
+        <writing-fluently theme="filled" size="16"  class="nodrag hover:text-[#e67e22] cursor-pointer" @click="$router.push({name:'setting'})"/>
+        <div class=" text-[#040505] font-bold border border-b-[#2C3A47] pl-1 pr-2 font-mono opacity-60">{{config.signature}}</div>
+      </div>
       <div class="hover:font-bold cursor-pointer text-sm nodrag" @click="downloadImage">下载壁纸</div>
     </div>
   </div>
 </template>
-<style scoped>
+<style lang='scss' scoped>
+ .run{
+    animation: identifier 5s infinite both;
+ }
+ @keyframes identifier {
+    from{
+        transform: translateX(0);
+    }
+    50%{
+        transform: translateX(calc(300px - 100%));
+    }
+    to{
+        transform: translateX(0);
+    }
+ }
 </style>

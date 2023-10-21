@@ -1,16 +1,12 @@
 import { IpcMainEvent, dialog, ipcMain } from "electron";
 import { downloadFile } from "./utils";
-let downloadUrl = ''
+let urlCurrent = ''
 ipcMain.on('downloadImage',async(_event:IpcMainEvent,url:string)=>{
-    if(url.includes('=')){
-        downloadUrl = url.substring(url.indexOf('=')+1)
-    }else{
-        downloadUrl = url.substring(url.lastIndexOf('/')+1)
-    }
+    urlCurrent ='xiaoxie_wallpaper_'+Date.now()+url.substring(url.lastIndexOf('.'));
     const res = await dialog.showSaveDialog({
         title: '下载图片',
         message:'小谢桌面软件',
-        defaultPath:downloadUrl,
+        defaultPath:urlCurrent,
         properties: ['createDirectory'],
     })
     if(res.canceled===false&&res.filePath){

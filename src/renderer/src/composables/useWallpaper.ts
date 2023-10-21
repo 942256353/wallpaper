@@ -14,6 +14,11 @@ export default () => {
             ElMessage.error('图片保存目录不存在，请重新设置')
             return router.push({ name: 'setting' })
         }
+        if(config.currentPaperUrl===config.url){
+            ElMessage.warning('当前壁纸与上次相同，无需重复设置')
+            return
+        }
+        config.currentPaperUrl = config.url
         window.api.setWallpaper(config.url, config.saveDirectory)
     }
     const downloadImage = () => {
