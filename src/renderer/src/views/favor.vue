@@ -9,6 +9,7 @@ const getTags = async () => {
       config.tagData = res.data.map((item) => {
         return { ...item, flag: false, size: Math.floor(Math.random() * 2 + 4) }
       })
+      config.tagData.push({id: "222", name: "二次元", flag: false, size: 4})
     } else {
       config.tagData = []
     }

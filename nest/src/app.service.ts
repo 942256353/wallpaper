@@ -9,8 +9,9 @@ import fecth from 'node-fetch';
 
 const imgUrl_1 = 'http://cdn.apc.360.cn/index.php?c=WallPaper&a=getAllCategoriesV2&from=360chrome';
 const imgUrl_2 = (id, start = 1) => (`http://wallpaper.apc.360.cn/index.php?c=WallPaper&a=getAppsByCategory&cid=${id}&start=${start}&count=1&from=360chrome`)
-const bing_Url = ['https://bing.img.run/rand_uhd.php','https://api.likepoems.com/img/bing','https://www.loliapi.com/acg/pc','https://api.7585.net.cn/360/api.php','https://api.likepoems.com/img/pc','https://api.7585.net.cn/360/api.php','https://www.dmoe.cc/random.php','https://api.7585.net.cn/360/api.php']
+const bing_Url =['https://bing.img.run/rand_uhd.php','https://api.likepoems.com/img/bing','https://api.7585.net.cn/360/api.php']
 const bing_startUrl = 'https://bing.img.run/uhd.php'
+const anime_2dUrl = ['https://www.loliapi.com/acg/pc','https://www.dmoe.cc/random.php','https://api.likepoems.com/img/pc']
 let tags = []
 let resId = [];
 
@@ -28,6 +29,11 @@ export class AppService {
       if (tags) {
         resId = tags.split(',')
         const id = resId[_.random(resId.length - 1)]
+        if(id==222){
+          const path = anime_2dUrl[_.random(anime_2dUrl.length - 1)]
+           let imgUrl = await fecth(path).then(r => r.url)
+           return imgUrl;
+        }
         const res_1 = await fecth(imgUrl_2(id)).then(r => r.json())
         const start = _.random(res_1.total) == 0 ? 1 : _.random(res_1.total)
         const data = await fecth(imgUrl_2(id, start)).then(r => r.json())
